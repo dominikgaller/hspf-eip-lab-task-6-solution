@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd" xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.2.xsd">
+
+    <jb:bean beanId="order" class="de.hspf.eip.task.solution.model.Order" createOnElement="order">
+        <jb:value property="customer" data="order/customer" />
+        <jb:value property="country" data="order/country" />
+        <jb:value property="region" data="order/region" />
+        <jb:wiring property="orderbody" beanIdRef="positions" />
+    </jb:bean>
+
+    <jb:bean beanId="positions" class="java.util.ArrayList" createOnElement="order">
+        <jb:wiring beanIdRef="position" />
+    </jb:bean>
+
+    <jb:bean beanId="position" class="de.hspf.eip.task.solution.model.Position" createOnElement="position">
+        <jb:value property="orderno" data="position/order-no" />
+        <jb:value property="number" decoder="Integer" data="position/number" />
+        <jb:value property="price" decoder="Double" data="position/price" />
+    </jb:bean>
+</smooks-resource-list>
